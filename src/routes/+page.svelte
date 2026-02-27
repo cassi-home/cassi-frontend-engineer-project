@@ -1,14 +1,14 @@
 <script lang="ts">
+	import { serviceRequests } from '$lib/stores/requests.svelte';
 	import type { ServiceRequest } from '$lib/types';
 	import { formatDate, getStatusLabel } from '$lib/utils/format';
-	import { serviceRequests } from '$lib/stores/requests';
 
 	let { data } = $props();
 
 	let filter = $state('all');
 
 	// Load data into store
-	serviceRequests.set(data.requests);
+	serviceRequests.items = data.requests;
 
 	let filteredRequests = $derived(
 		filter === 'all'
@@ -116,8 +116,8 @@
 							</span>
 						</td>
 						<td
-							class="px-6 py-4 text-sm whitespace-nowrap text-gray-500"
 							style="text-transform: capitalize"
+							class="px-6 py-4 text-sm whitespace-nowrap text-gray-500"
 						>
 							{request.priority}
 						</td>
